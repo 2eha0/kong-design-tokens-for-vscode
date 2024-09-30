@@ -1,7 +1,7 @@
 {
 	"name": "kong-design-tokens-for-vscode",
 	"displayName": "Kong Design Tokens for VSCode",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"publisher": "ZehaoZhang",
 	"private": true,
 	"license": "MIT",
@@ -33,5 +33,8 @@
 		"eslint": "^8.26.0",
 		"typescript": "^5.5.2"
 	},
-	"icon": "icon.png"
+	"icon": "icon.png",
+	"dependencies": {
+		"@kong/design-tokens": "^1.17.2"
+	}
 }
