@@ -1,7 +1,7 @@
 {
 	"name": "kong-design-tokens-for-vscode",
 	"displayName": "Kong Design Tokens for VSCode",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"publisher": "ZehaoZhang",
 	"private": true,
 	"license": "MIT",
