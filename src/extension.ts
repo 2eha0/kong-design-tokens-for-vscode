@@ -13,59 +13,57 @@ function serializeTokens() {
 }
 
 function prefixMatch(valuePrefixes: string[], prefix: string): string[] {
-	const p = prefix.toLocaleLowerCase()
-	return valuePrefixes.filter(valuePrefix => {
-		return valuePrefix.startsWith(p)
-	})
+  const p = prefix.toLocaleLowerCase()
+  return valuePrefixes.filter(valuePrefix => {
+    return valuePrefix.startsWith(p)
+  })
 }
 
 export function activate(context: vscode.ExtensionContext) {
 
-	const tokens = serializeTokens()
+  const tokens = serializeTokens()
 
-	const provider1 = vscode.languages.registerCompletionItemProvider({
-		language: 'vue',
-		scheme: 'file',
-	}, {
-		provideCompletionItems(document, position, token, context) {
-			const text = document.getText();
-			const styleStart = text.indexOf('<style');
-			const styleEnd = text.indexOf('</style>');
-			const offset = document.offsetAt(position);
+  const provider1 = vscode.languages.registerCompletionItemProvider({
+    language: 'vue',
+    scheme: 'file',
+  }, {
+    provideCompletionItems(document, position) {
+      const text = document.getText();
+      const styleStart = text.indexOf('<style');
+      const styleEnd = text.indexOf('</style>');
+      const offset = document.offsetAt(position);
 
-			if ((styleStart === -1 || styleEnd === -1) || (offset < styleStart || offset > styleEnd)) {
-				return [];
-			}
+      if ((styleStart === -1 || styleEnd === -1) || (offset < styleStart || offset > styleEnd)) {
+        return [];
+      }
 
-			const line = document.lineAt(position).text;
-			const cssPropertyMatch = line.match(/([a-zA-Z-]+):\s*([^;]*)/);
+      const line = document.lineAt(position).text;
+      const cssPropertyMatch = line.match(/([a-zA-Z-]+):\s*([^;]*)/);
 
-			let cssProperty = ''
+      let cssProperty = ''
 
-			if (cssPropertyMatch) {
-				cssProperty = cssPropertyMatch[1];
-			}
+      if (cssPropertyMatch) {
+        cssProperty = cssPropertyMatch[1];
+      }
 
-			if (!PROPERTY_TOKEN_MAP[cssProperty]) {
-				return []
-			}
+      if (!PROPERTY_TOKEN_MAP[cssProperty]) {
+        return []
+      }
 
-			const availableTokens = PROPERTY_TOKEN_MAP[cssProperty]
+      const availableTokens = PROPERTY_TOKEN_MAP[cssProperty]
 
-			const matchedTokens = availableTokens.flatMap(prefix => {
-				return prefixMatch(tokens, `$kui-${prefix}`)
-			})
+      const matchedTokens = availableTokens.flatMap(prefix => {
+        return prefixMatch(tokens, `$kui-${prefix}`)
+      })
 
-			return matchedTokens. map(token => {
-				const [key] = token.split(':')
-				const item = new vscode.CompletionItem(token, vscode.CompletionItemKind.Value)
-				item.insertText = key
-				return item
-			})
-		}
-	}, ' ', ':', '$');
+      return matchedTokens.map(token => {
+        const [key] = token.split(':')
+        const item = new vscode.CompletionItem(token, vscode.CompletionItemKind.Value)
+        item.insertText = key
+        return item
+      })
+    }
+  }, ' ', ':', '$');
 
-	context.subscriptions.push(provider1);
+  context.subscriptions.push(provider1);
 }
-
-
