@@ -11,9 +11,6 @@ updates:
       prefix: "[bot]"
     open-pull-requests-limit: 10
     groups:
-      kong-packages:
-        patterns:
-          - "@kong/*"
       all-dependencies:
         patterns:
           - "*"
