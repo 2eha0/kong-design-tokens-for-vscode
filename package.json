@@ -35,6 +35,6 @@
 	},
 	"icon": "icon.png",
 	"dependencies": {
-		"@kong/design-tokens": "^1.17.2"
+		"@kong/design-tokens": "^1.18.1"
 	}
 }
