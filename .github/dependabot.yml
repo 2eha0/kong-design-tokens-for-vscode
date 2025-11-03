@@ -10,12 +10,13 @@ updates:
     commit-message:
       prefix: "[bot]"
     open-pull-requests-limit: 10
-    allow:
-      - dependency-name: "@kong/*"
     groups:
       kong-packages:
         patterns:
           - "@kong/*"
+      all-dependencies:
+        patterns:
+          - "*"
     labels:
       - "dependencies"
       - "automated"
