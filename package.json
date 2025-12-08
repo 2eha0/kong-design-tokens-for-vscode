@@ -27,14 +27,14 @@
 	},
 	"devDependencies": {
 		"@types/node": "^24",
-		"@types/vscode": "^1.105.0",
-		"@typescript-eslint/eslint-plugin": "^8.46.2",
+		"@types/vscode": "^1.106.1",
+		"@typescript-eslint/eslint-plugin": "^8.48.0",
 		"@typescript-eslint/parser": "^8.46.2",
-		"eslint": "^9.39.0",
+		"eslint": "^9.39.1",
 		"typescript": "^5.9.3"
 	},
 	"icon": "icon.png",
 	"dependencies": {
-		"@kong/design-tokens": "^1.18.1"
+		"@kong/design-tokens": "^1.18.2"
 	}
 }
